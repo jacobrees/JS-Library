@@ -8,6 +8,7 @@ function Book(title, author, numberOfPages, hasRead) {
 }
 
 function addBookToLibrary(book) {
+  alert("I want to add a book")
   return myLibrary.push(book)
 }
 
@@ -30,3 +31,15 @@ function displayBooks() {
   booksContainer.innerHTML = booksList;
 }
 
+
+const bookForm = document.forms["bookForm"];
+bookForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // title, author, numberOfPages, hasRead
+  // if data is valid?
+    // book = new Book(title, author, numberOfPages, hasRead)
+    // addBookToLibrary(book)
+
+  alert("I am about to add a book");
+});
