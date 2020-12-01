@@ -11,6 +11,15 @@ Book.prototype.toggle = function () {
   this.hasRead = !this.hasRead;
 }
 
+function visibility(){
+  let bookForm = document.forms.bookForm ;
+  
+    bookForm.classList.remove("hide-form");
+    bookForm.classList.add("show-form");
+}
+
+document.getElementById("addBook").addEventListener("click", visibility);
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
