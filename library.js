@@ -13,11 +13,11 @@ function addBookToLibrary(book) {
 
 function bookCard(book, bookIndex) {
   return `<div>
-    <span data-book-index="${bookIndex}"></span>
     <h3>${book.title}</h3>
     <p><span>Written by:</span> ${book.author}</p>
     <p>Number of pages: ${book.numberOfPages}</p>
     <p>${ book.hasRead ? "You have read this book" : "You haven't read this book!"} </p>
+    <button class="remove-btn" data-book-index="${bookIndex}">Remove Book</button>
   </div>`
 }
 
