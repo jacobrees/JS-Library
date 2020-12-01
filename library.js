@@ -11,8 +11,9 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
-function bookCard(book) {
+function bookCard(book, bookIndex) {
   return `<div>
+    <span data-book-index="${bookIndex}"></span>
     <h3>${book.title}</h3>
     <p><span>Written by:</span> ${book.author}</p>
     <p>Number of pages: ${book.numberOfPages}</p>
@@ -23,7 +24,7 @@ function bookCard(book) {
 function displayBooks() {
   let booksList = ""
   myLibrary.forEach( (book) => {
-    booksList += bookCard(book);
+    booksList += bookCard(book, bookIndex);
   });
 
   const booksContainer = document.getElementById("booksContainer");
@@ -42,9 +43,9 @@ bookForm.addEventListener("submit", (e) => {
   const book = new Book(title.value, author.value, numberOfPages.value, hasRead.checked);
 
   addBookToLibrary(book);
-  
+
   const booksContainer = document.getElementById("booksContainer");
-  booksContainer.insertAdjacentHTML('beforeend', bookCard(book));
+  booksContainer.insertAdjacentHTML('beforeend', bookCard(book, myLibrary.length - 1));
 
   e.target.reset();
   return false;

@@ -10,21 +10,26 @@
     <div>
         <button id="addBook"> Add New Book</button>
         <form name="bookForm">
-            <u><b>Add Book</b></u></p>
-            <P><b>Title:</b>
-            <input type="text" name="title" size="20"></p>
-            <P><b>Author: </b><input type="text" name="author" size="55"></p>
-            <P><b>Number Of Pages:</b> <input type="number" name="numberofpages" size="20"></p>
-            <P><b>Has Read:</b>
-            <input type="checkbox" name="hasRead" size="20"></p>
-            <P><input type="submit" value="Submit"></p>
-          </form>
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" required />
 
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" required />
+
+            <label for="pages">Pages</label>
+            <input type="number" name="pages" id="pages" min="1" required/>
+
+            <label for="read">Read?</label>
+            <input type="checkbox" name="read" id="read">
+
+            <button type="submit">Add Book</button>
+        </form>
     </div>
-    
+
     <div id="booksContainer">
 
     </div>
+    
     <script src="library.js"></script>
 </body>
 </html>
