@@ -21,10 +21,13 @@ function bookCard(book, bookIndex) {
   </div>`
 }
 
+
+
 function displayBooks() {
   let booksList = ""
   myLibrary.forEach( (book) => {
     booksList += bookCard(book, bookIndex);
+
   });
 
   const booksContainer = document.getElementById("booksContainer");
@@ -49,4 +52,11 @@ bookForm.addEventListener("submit", (e) => {
 
   e.target.reset();
   return false;
+});
+
+const removeBookButtons = document.querySelectorAll('.remove-btn') 
+removeBookButtons.forEach ( (btn) => { 
+  btn.addEventListener('click', e => {
+    alert("Removed From List");
+  );
 });
