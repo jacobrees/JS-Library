@@ -11,6 +11,10 @@ function addBookToLibrary(book) {
   myLibrary.push(book);
 }
 
+function removeBookFromLibrary(e) {
+  alert("Removed From List");
+}
+
 function bookCard(book, bookIndex) {
   return `<div>
     <h3>${book.title}</h3>
@@ -21,17 +25,19 @@ function bookCard(book, bookIndex) {
   </div>`
 }
 
-
-
 function displayBooks() {
   let booksList = ""
   myLibrary.forEach( (book) => {
     booksList += bookCard(book, bookIndex);
-
   });
 
   const booksContainer = document.getElementById("booksContainer");
   booksContainer.innerHTML = booksList;
+
+  const removeBookButtons = document.querySelectorAll('.remove-btn');
+  removeBookButtons.forEach ((btn) => { 
+    btn.addEventListener('click', removeBookFromLibrary);
+  });
 }
 
 
@@ -47,16 +53,15 @@ bookForm.addEventListener("submit", (e) => {
 
   addBookToLibrary(book);
 
+  let bookIndex = myLibrary.length - 1;
   const booksContainer = document.getElementById("booksContainer");
-  booksContainer.insertAdjacentHTML('beforeend', bookCard(book, myLibrary.length - 1));
+  booksContainer.insertAdjacentHTML('beforeend', bookCard(book, bookIndex));
 
   e.target.reset();
+
+  const removeBookButton = document.querySelector(`button[data-book-index="${bookIndex}"]`);
+  removeBookButton.addEventListener('click', removeBookFromLibrary);
+
   return false;
 });
 
-const removeBookButtons = document.querySelectorAll('.remove-btn') 
-removeBookButtons.forEach ( (btn) => { 
-  btn.addEventListener('click', e => {
-    alert("Removed From List");
-  );
-});
