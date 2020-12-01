@@ -12,7 +12,9 @@ function addBookToLibrary(book) {
 }
 
 function removeBookFromLibrary(e) {
-  alert("Removed From List");
+  let bookIndex = e.target.dataset.bookIndex;
+  myLibrary.splice(bookIndex, 1);
+  displayBooks();
 }
 
 function bookCard(book, bookIndex) {
@@ -27,7 +29,7 @@ function bookCard(book, bookIndex) {
 
 function displayBooks() {
   let booksList = ""
-  myLibrary.forEach( (book) => {
+  myLibrary.forEach( (book, bookIndex) => {
     booksList += bookCard(book, bookIndex);
   });
 
