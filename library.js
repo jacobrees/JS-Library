@@ -7,6 +7,10 @@ function Book(title, author, numberOfPages, hasRead) {
   this.hasRead = hasRead;
 }
 
+Book.prototype.toggle = function () {
+  this.hasRead = !this.hasRead;
+}
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -17,12 +21,20 @@ function removeBookFromLibrary(e) {
   displayBooks();
 }
 
+function readBookToggler(e) {
+  let bookIndex = e.target.dataset.toggledBookIndex;
+  let book = myLibrary[bookIndex];
+  book.toggle();
+}
+
 function bookCard(book, bookIndex) {
   return `<div>
     <h3>${book.title}</h3>
     <p><span>Written by:</span> ${book.author}</p>
     <p>Number of pages: ${book.numberOfPages}</p>
-    <p>${ book.hasRead ? "You have read this book" : "You haven't read this book!"} </p>
+    <p>Read: 
+       <input type="checkbox" name="read" class="toggle-read" ${book.hasRead ? "checked" : ""} data-toggled-book-index="${bookIndex}" >
+    </p>
     <button class="remove-btn" data-book-index="${bookIndex}">Remove Book</button>
   </div>`
 }
@@ -40,6 +52,11 @@ function displayBooks() {
   removeBookButtons.forEach ((btn) => { 
     btn.addEventListener('click', removeBookFromLibrary);
   });
+
+  const readTogglers = document.querySelectorAll(`.toggle-read`);
+  readTogglers.forEach((btn) => {
+    btn.addEventListener('click', readBookToggler);
+  });
 }
 
 
@@ -55,14 +72,9 @@ bookForm.addEventListener("submit", (e) => {
 
   addBookToLibrary(book);
 
-  let bookIndex = myLibrary.length - 1;
-  const booksContainer = document.getElementById("booksContainer");
-  booksContainer.insertAdjacentHTML('beforeend', bookCard(book, bookIndex));
+  displayBooks();
 
   e.target.reset();
-
-  const removeBookButton = document.querySelector(`button[data-book-index="${bookIndex}"]`);
-  removeBookButton.addEventListener('click', removeBookFromLibrary);
 
   return false;
 });
