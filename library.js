@@ -8,8 +8,7 @@ function Book(title, author, numberOfPages, hasRead) {
 }
 
 function addBookToLibrary(book) {
-  alert("I want to add a book")
-  return myLibrary.push(book)
+  myLibrary.push(book);
 }
 
 function bookCard(book) {
@@ -32,14 +31,21 @@ function displayBooks() {
 }
 
 
+displayBooks();
+
 const bookForm = document.forms["bookForm"];
+
 bookForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // title, author, numberOfPages, hasRead
-  // if data is valid?
-    // book = new Book(title, author, numberOfPages, hasRead)
-    // addBookToLibrary(book)
+  const [title, author, numberOfPages, hasRead] = e.target.elements;
+  const book = new Book(title.value, author.value, numberOfPages.value, hasRead.checked);
 
-  alert("I am about to add a book");
+  addBookToLibrary(book);
+  
+  const booksContainer = document.getElementById("booksContainer");
+  booksContainer.insertAdjacentHTML('beforeend', bookCard(book));
+
+  e.target.reset();
+  return false;
 });
