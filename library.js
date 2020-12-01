@@ -11,11 +11,11 @@ Book.prototype.toggle = function () {
   this.hasRead = !this.hasRead;
 }
 
-function visibility(){
+function visibility(e){
   let bookForm = document.forms.bookForm ;
-  
-    bookForm.classList.remove("hide-form");
-    bookForm.classList.add("show-form");
+  e.target.classList.add('hide-form');
+  bookForm.classList.remove("hide-form");
+  bookForm.classList.add("show-form");
 }
 
 document.getElementById("addBook").addEventListener("click", visibility);
@@ -84,6 +84,13 @@ bookForm.addEventListener("submit", (e) => {
   displayBooks();
 
   e.target.reset();
+
+  e.target.classList.remove('show-form');
+  e.target.classList.add('hide-form');
+  
+  let addBook = document.getElementById("addBook");
+  addBook.classList.remove('hide-form');
+  addBook.classList.add('show-form');
 
   return false;
 });
